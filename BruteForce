@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int ans=-1;
+    int longestSubarray(vector<int>& nums, int limit) {
+        if(limit!=0)ans=1;
+        for(int i=0;i<nums.size()-1;i++){
+            int maxi=nums[i],mini=nums[i];
+            int j;
+            for(j=i+1;j<nums.size();j++){
+                if(abs(nums[i]-nums[j])<=limit)
+                {
+                    int count=0;
+                    int ans1=ans;
+                    
+                    ans=max(j-i+1,ans);
+                    if(ans1!=ans)count++;
+                 // cout<<ans<<endl;
+                    maxi=max(maxi,nums[j]);
+                    mini=min(mini,nums[j]);
+                    if(abs(maxi-mini)>limit)
+                        {
+                        if(count==1)ans=ans-1;
+                        break;
+                        }
+                }
+                    
+                else
+                    break;
+            }
+            if(j==nums.size())return ans;
+        }
+        return ans;
+    }
+};
